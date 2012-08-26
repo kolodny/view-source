@@ -799,22 +799,29 @@ document.getElementsByTagName('head')[0].appendChild(link);
 
 jush.highlight_tag("code");
 
-var ops = document.getElementsByClassName('jush-att'), 
-	jushAtt = [];
+var tags = document.getElementsByClassName('jush-att'), 
+	jushAtt = [],
+	what;
 	
-for (var i = 0; i < ops.length; i++) {
-	var what = ops[i].childNodes[1].innerHTML.toLowerCase();
+for (var i = 0; i < tags.length; i++) {
+	try {
+		what = tags[i].childNodes[1].innerHTML.toLowerCase();
+	} catch {
+		what = '';
+	}
 	
 	if (what === 'href' || what === 'src')
-		jushAtt.push(ops[i])
+		jushAtt.push(tags[i])
 }
 
 for (i = 0; i < jushAtt.length; i++) {
-	var linkify = jushAtt[i].childNodes[2].childNodes[1],
-		text = linkify.textContent,
-		replaceSpan = document.createElement('span');
-	
-	replaceSpan.innerHTML = text.link(text);
-	linkify.parentElement.replaceChild(replaceSpan, linkify);
+	try {
+		var linkify = jushAtt[i].childNodes[2].childNodes[1],
+			text = linkify.textContent,
+			replaceSpan = document.createElement('span');
+		
+		replaceSpan.innerHTML = text.link(text);
+		linkify.parentElement.replaceChild(replaceSpan, linkify);
+	} catch {}
 }
 
