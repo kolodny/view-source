@@ -806,7 +806,7 @@ var tags = document.getElementsByClassName('jush-att'),
 for (var i = 0; i < tags.length; i++) {
 	try {
 		what = tags[i].childNodes[1].innerHTML.toLowerCase();
-	} catch {
+	} catch(e) {
 		what = '';
 	}
 	
@@ -822,6 +822,6 @@ for (i = 0; i < jushAtt.length; i++) {
 		
 		replaceSpan.innerHTML = text.link(text);
 		linkify.parentElement.replaceChild(replaceSpan, linkify);
-	} catch {}
+	} catch(e) {}
 }
 
